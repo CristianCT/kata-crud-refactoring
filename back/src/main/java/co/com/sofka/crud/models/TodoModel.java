@@ -1,11 +1,10 @@
-package co.com.sofka.crud;
+package co.com.sofka.crud.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
-public class Todo {
+@Table(name = "todos")
+public class TodoModel {
     @Id
     @GeneratedValue
     private Long id;
