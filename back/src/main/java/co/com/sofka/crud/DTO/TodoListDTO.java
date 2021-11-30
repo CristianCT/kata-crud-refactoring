@@ -8,12 +8,12 @@ import java.util.Set;
 public class TodoListDTO {
     private Long id;
     private String name;
-    private Set<TodoModel> items = new HashSet<>();
+    private Set<TodoDTO> items = new HashSet<>();
 
     public TodoListDTO(){
         super();
     }
-    public TodoListDTO(Long id, String name, Set<TodoModel> items) {
+    public TodoListDTO(Long id, String name, Set<TodoDTO> items) {
         this.id = id;
         this.name = name;
         this.items = items;
@@ -35,11 +35,11 @@ public class TodoListDTO {
         this.name = name;
     }
 
-    public Set<TodoModel> getItems() {
+    public Set<TodoDTO> getItems() {
         return items;
     }
 
-    public void setItems(Set<TodoModel> items) {
+    public void setItems(Set<TodoDTO> items) {
         this.items = items;
     }
 }

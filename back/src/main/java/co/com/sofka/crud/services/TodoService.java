@@ -6,6 +6,7 @@ import co.com.sofka.crud.models.TodoListModel;
 import co.com.sofka.crud.models.TodoModel;
 import co.com.sofka.crud.repositories.TodoListRepository;
 import co.com.sofka.crud.repositories.TodoRepository;
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,17 +29,21 @@ public class TodoService {
         this.todoRepository = todoRepository;
     }
 
-    public Set<TodoDTO> getTodosByListId(Long id) {
+    public Set<TodoDTO> getTodosByListId(Long id){
         return todoListRepository.findById(id)
-                .orElseThrow(() -> new NotFoundIdxception(NO_FAULT_ID))
+                .orElseThrow(() -> {
+                    throw new RuntimeException(NO_FAULT_ID);
+                })
                 .getTodos().stream()
                 .map(item -> new TodoDTO(item.getId(), item.getName(), item.isCompleted(), id))
                 .collect(Collectors.toSet());
     }
 
-    public TodoDTO addNewTodoByListId(Long listId, TodoDTO todoDTO) {
+    public TodoDTO addNewTodoByListId(Long listId, TodoDTO todoDTO){
         var listTodo = todoListRepository.findById(listId)
-                .orElseThrow(() -> new NotFoundException(NO_FAULT_ID));
+                .orElseThrow(() -> {
+                    throw new RuntimeException(NO_FAULT_ID);
+                });
         var todo = new TodoModel();
 
         todo.setCompleted(todoDTO.isCompleted());
@@ -46,7 +51,7 @@ public class TodoService {
         todo.setId(todoDTO.getId());
 
         if(todo.getName().isEmpty() || todo.getName().length() < 3){
-            throw new TodoBusinessException("No valid entity To-Do to be save");
+            new NotFoundException("No valid entity To-Do to be save");
         }
 
         //addition new to-do
@@ -65,7 +70,9 @@ public class TodoService {
 
     public TodoDTO updateATodoByListId(Long listId, TodoDTO todoDTO) {
         var listTodo = todoListRepository.findById(listId)
-                .orElseThrow(() -> new NotFoundException(NO_FAULT_ID));
+                .orElseThrow(() -> {
+                    throw new RuntimeException(NO_FAULT_ID);
+                });
 
         //edit to-do
         for(var item : listTodo.getTodos()){
@@ -86,7 +93,7 @@ public class TodoService {
         var listTodo = new TodoListModel();
         listTodo.setName(Objects.requireNonNull(todoListDTO.getName()));
         if(listTodo.getName().isEmpty() || listTodo.getName().length() < 3){
-            throw new ToDoBusinessException("No valid entity List To-Do to be save");
+            new NotFoundException("No valid entity List To-Do to be save");
         }
         var id = todoListRepository.save(listTodo).getId();
         todoListDTO.setId(id);
@@ -108,12 +115,17 @@ public class TodoService {
 
     public void deleteListById(Long listId){
         var listTodo = todoListRepository.findById(listId)
-                .orElseThrow(() -> new NotFoundException(NO_FAULT_ID));
+                .orElseThrow(() -> {
+                    throw new RuntimeException(NO_FAULT_ID);
+                });
         todoListRepository.delete(listTodo);
     }
 
-    public void deleteATodoById(Long id) {
-        var todo = todoRepository.findById(id).orElseThrow(() -> new NotFoundException(NO_FAULT_ID));
+    public void deleteATodoById(Long id){
+        var todo = todoRepository.findById(id)
+                .orElseThrow(() -> {
+                    throw new RuntimeException(NO_FAULT_ID);
+                });
         todoRepository.delete(todo);
     }
 }
