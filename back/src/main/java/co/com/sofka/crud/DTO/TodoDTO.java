@@ -1,13 +1,28 @@
 package co.com.sofka.crud.DTO;
 
-import java.io.Serializable;
+public class TodoDTO {
 
-public class TodoDTO implements Serializable {
-
+    private Long listId;
     private Long id;
     private String name;
     private boolean completed;
-    private String groupListId;
+    public TodoDTO() {
+        super();
+    }
+    public TodoDTO(Long id, String name, boolean completed, Long listId) {
+        this.id = id;
+        this.name = name;
+        this.completed = completed;
+        this.listId = listId;
+    }
+
+    public Long getListId() {
+        return listId;
+    }
+
+    public void setListId(Long listId) {
+        this.listId = listId;
+    }
 
     public Long getId() {
         return id;
@@ -31,13 +46,5 @@ public class TodoDTO implements Serializable {
 
     public void setCompleted(boolean completed) {
         this.completed = completed;
-    }
-
-    public String getGroupListId() {
-        return groupListId;
-    }
-
-    public void setGroupListId(String groupListId) {
-        this.groupListId = groupListId;
     }
 }
