@@ -49,7 +49,7 @@ public class TodoController {
     }
 
     @DeleteMapping(value = "api/{id}/todo")
-    public void deleteAToDoById(@PathVariable("id")Long id){
+    public void deleteATodoById(@PathVariable("id")Long id){
         service.deleteATodoById(id);
     }
 
