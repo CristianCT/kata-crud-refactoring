@@ -25,14 +25,14 @@ export default () => {
 
     return <form ref={formRef}>
         <div className="card">
-            <div class="card-header text-center">Create List</div>
+            <div className="card-header text-center">Create List</div>
             <div className="input-group card-body">
                 <input
                     className="form-control"
                     aria-describedby="button-addon1"
                     type="text"
                     name="name"
-                    placeholder="Lista de TODOs"
+                    placeholder="TODOS LIST"
                     onChange={(event) => {
                         setState({ name: event.target.value })
                     }}  ></input>

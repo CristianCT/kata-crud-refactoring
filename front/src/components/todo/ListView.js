@@ -56,7 +56,7 @@ export default ({ listId, todo }) => {
     };
     return <div>
         {!isLoaded && <div>Loading...</div>}
-        <table >
+        <table className="table">
             <thead>
                 <tr>
                     <td>ID</td>
@@ -70,9 +70,15 @@ export default ({ listId, todo }) => {
                     return <tr key={todo.id} style={todo.completed ? decorationDone : {}}  id={"to-do-"+todo.id}>
                         <td>{todo.id}</td>
                         <td>{todo.name}</td>
-                        <td><input type="checkbox" defaultChecked={todo.completed} onChange={(event) => onChange(event, todo)}></input></td>
-                        <td><button onClick={() => onDelete(todo.id)}>Eliminar</button></td>
-                        <td><button disabled={todo.completed} onClick={() => onEdit(todo)}>Editar</button></td>
+                        <td>
+                            <div className="form-check form-switch">
+                                <input className="form-check-input" role="switch" type="checkbox" defaultChecked={todo.completed} onChange={(event) => onChange(event, todo)}></input>
+                            </div>
+                        </td>
+                        <td><div className="btn-group" role="group">
+                            <button type="button" className="btn btn-outline-danger" onClick={() => onDelete(todo.id)}>Eliminar</button>
+                            <button type="button" className="btn btn-outline-success" disabled={todo.completed} onClick={() => onEdit(todo)}>Editar</button>
+                        </div></td>
                     </tr>
                 })}
             </tbody>

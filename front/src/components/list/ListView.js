@@ -28,19 +28,19 @@ export default () => {
         })
     };
 
-    return <div>
+    return <div className="container-cards">
         {!isLoaded && <div>Loading...</div>}
         {list.elements.length === 0 && <div>empty list!</div>}
         {list.elements.map((element) => {
-            return <div key={element.id} id={"list-to-do-"+element.id}>
+            return <div className="card todo-list" key={element.id} id={"list-todo-"+element.id}>
                 <fieldset>
-                    <legend>
-                        {element.name.toUpperCase()}
-                        <button onClick={() => onDelete(element.id)}>Eliminar</button>
-                    </legend>
+                    <legend className="card-header">{element.name.toUpperCase()}</legend>
                     <ToDoForm listId={element.id} todo={todo} />
                     <ToDoList listId={element.id} todo={todo} />
                 </fieldset>
+                <div className="d-grid gap-2">
+                    <button className="btn btn-danger btn-block" onClick={() => onDelete(element.id)}>Eliminar</button>
+                </div>
             </div>
         })}
     </div>

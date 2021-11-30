@@ -53,15 +53,19 @@ export default ({ listId, todo }) => {
     }
 
     return <form ref={formRef}>
-        <input
-            type="text"
-            name="name"
-            placeholder="¿Qué piensas hacer?"
-            defaultValue={item.name}
-            onChange={(event) => {
-                setState({ ...state, name: event.target.value })
-            }}  ></input>
-        {item.id && <button onClick={onEdit}>Actualizar</button>}
-        {!item.id && <button onClick={onAdd}>Crear</button>}
+        <div className="input-group">
+            <input
+                className="form-control"
+                aria-describedby="button-addon2"
+                type="text"
+                name="name"
+                placeholder="¿Qué piensas hacer?"
+                defaultValue={item.name}
+                onChange={(event) => {
+                    setState({ ...state, name: event.target.value })
+                }}  ></input>
+            {item.id && <button className="btn btn-outline-secondary" type="button" id="button-addon2" onClick={onEdit}>Actualizar</button>}
+            {!item.id && <button className="btn btn-outline-secondary" type="button" id="button-addon2" onClick={onAdd}>Crear</button>}
+        </div>
     </form>
 }
